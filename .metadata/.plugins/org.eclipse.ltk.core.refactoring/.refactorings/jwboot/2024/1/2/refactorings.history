@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;jwboot/src/main/resources/static/images/goo yoon jung.jpg&apos; to &apos;pic.jpg&apos;" description="Rename resource &apos;goo yoon jung.jpg&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/static/images/goo yoon jung.jpg" name="pic.jpg" stamp="1704955852386" updateReferences="true"/>
+</session>
