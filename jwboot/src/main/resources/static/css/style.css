@@ -1,9 +1,64 @@
 @charset "UTF-8";
 
-.wrap{
-	width: 1000px;
-	margin: 30px auto;
-	text-align: center;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    text-align: center;
 }
 
-h1{color: blue;}
+.wrap {
+    width: 600px;
+    margin: 20px auto;
+    border-radius: 5px; /* 테두리를 둥글게 설정 */
+}
+
+a {
+	text-decoration: none;	
+}
+
+h2 {
+    color: #333;
+}
+
+.tbl_write {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tbl_write th {
+    border-bottom: 2px solid black;
+    padding: 8px;
+}
+
+.tbl_write td {
+    border-bottom: 1px dotted gray;
+    padding: 8px;
+}
+
+.tbl_write input[type="text"]{
+   width: 700px; height: 25px;
+}
+.tbl_write textarea{
+   width: 700px; height: 300px;
+}
+
+button {
+    background-color: gray;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+button:hover {
+    background-color: #73728d;
+}
