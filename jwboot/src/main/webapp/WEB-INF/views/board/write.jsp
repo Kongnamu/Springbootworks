@@ -28,7 +28,7 @@
 					<tr>
 						<td>
 						<textarea rows="5" cols="60" 
-								name="content" required></textarea>
+								name="content" required placeholder="내용을 입력해주세요"></textarea>
 						</td>
 					</tr>
 					<tr>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<div class="container">  
+		<h2>My Hoooooooom!</h2>
+		<img th:src="@{/images/1.jpg}">
+	</div>
+	<div class="menu">
+		<a th:href="@{/member/join}">회원 가입</a>&nbsp;&nbsp;&nbsp;
+		<a th:href="@{/member/list}">회원 목록</a>&nbsp;&nbsp;&nbsp;
+		<a th:href="@{/member/login}">로그인</a>
+	</div>
+</body>
+</html>

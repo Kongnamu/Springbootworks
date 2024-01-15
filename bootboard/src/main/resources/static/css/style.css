@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ddddcc;
+    text-align: center;
+}
+a{text-decoration: none;}
+
+h2 {
+    color: #667788;
+}
+
+/* join 스타일 */
+ul li{
+	list-style: none;
+}
+
+.joinform{
+	width: 500px;
+	margin: 0 auto;
+}
+
+.joinform label{
+	width: 100px;
+	float: left;
+	margin: 5px;
+}
+
+input {
+    background-color: gray;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+/* list 스타일 */
+.memberlist{width: 700px; margin: 0 auto;
+	border-collapse: collapse;}
+	
+.memberlist th{border-bottom: 2px solid black;
+    padding: 8px;}
+    
+.memberlist td{border-bottom: 1px dotted gray;
+    padding: 8px;}
+    
+/* detail 스타일 */
+.detail{width: 420px; margin: 0 auto;}
+.detail input {
+	background-color: gray;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+.detail label{
+	width: 150px;
+	margin: 5px;
+	}
+.detail up{padding: 0;}
+
+/* login 스타일 */
+.joinform input {
+	background-color: gray;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+.error {
+	color: red;
+}
+
+
+
