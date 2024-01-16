@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Update</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<div class="container">
+		<h2>Update Message</h2>
+		<form th:action="@{/board/update}" method="post">
+		<input type="hidden" name="id" th:value="${board.id}">
+		<table class="tbl_list">
+			<tbody>
+				<tr>
+					<td>
+						<input type="text" name="boardTitle"
+							placeholder="글 제목" th:value="${board.boardTitle}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="boardWriter"
+							readonly th:value="${board.boardWriter}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<textarea rows="5" cols="50" name="boardContent"
+								 th:text="${board.boardContent}" ></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="boardHits"
+							readonly th:value="${board.boardHits}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="CreatedDate"
+							readonly th:value="${board.createdDate}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="submit" value="저장">
+						<input type="reset" value="취소">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+	</div>
+</body>
+</html>
