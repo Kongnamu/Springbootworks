@@ -4,17 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.khit.board.dto.BoardDTO;
-import com.khit.board.dto.MemberDTO;
 import com.khit.board.entity.Board;
 import com.khit.board.exception.BootBoardException;
 import com.khit.board.repository.BoardRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class BoardService {
@@ -31,7 +36,8 @@ public class BoardService {
 
 	public List<BoardDTO> findAll() {
 		//db에서 entity list를 가져옴
-		List<Board> BoardList = boardRepository.findAll();
+		List<Board> BoardList = 
+				boardRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 		//entity -> dto로 변환
 		List<BoardDTO> boardDTOList = new ArrayList<>();
 		for(Board board : BoardList) {
@@ -66,5 +72,24 @@ public class BoardService {
 	public void update(BoardDTO boardDTO) {
 		Board board = Board.toUpdateEntity(boardDTO);
 		boardRepository.save(board);
+	}
+	//글 목록 (페이지 포함)
+	public Page<BoardDTO> findListAll(Pageable pageable) {
+		int page = pageable.getPageNumber() - 1; //db는 현재 페이지보다 1 작음
+		int pageSize = 10;
+		pageable = PageRequest.of(page, pageSize, Sort.Direction.DESC, "id");
+		
+		Page<Board> boardList = boardRepository.findAll(pageable);
+		
+		log.info("boardList.isFirst()=" + boardList.isFirst());
+		log.info("boardList.isLast()=" + boardList.isLast());
+		
+		//생성자 방식으로 boardDTOList를 가져오기
+		Page<BoardDTO> boardDTOList = boardList.map(board ->
+				new BoardDTO(board.getId(), board.getBoardTitle(), board.getBoardWriter(),
+					board.getBoardContent(), board.getBoardHits(), board.getCreatedDate(),
+					board.getUpdatedDate()));
+		
+		return boardDTOList;
 	}
 }

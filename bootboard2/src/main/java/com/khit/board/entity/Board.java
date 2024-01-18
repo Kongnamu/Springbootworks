@@ -50,5 +50,16 @@ public class Board extends BaseEntity {
 				.build();
 		return board;
 	}
+	//dto를 entity로 변환 (업데이트)
+	public static Board toUpdateEntity(BoardDTO boardDTO) {
+		Board board = Board.builder()
+				.id(boardDTO.getId())
+				.boardTitle(boardDTO.getBoardTitle())
+				.boardWriter(boardDTO.getBoardWriter())
+				.boardContent(boardDTO.getBoardContent())
+				.boardHits(boardDTO.getBoardHits())
+				.build();
+		return board;
+	}
 	
 }

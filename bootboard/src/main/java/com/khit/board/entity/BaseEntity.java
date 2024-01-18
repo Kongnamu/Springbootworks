@@ -3,6 +3,7 @@ package com.khit.board.entity;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,7 +19,8 @@ public class BaseEntity {
 	@CreationTimestamp
 	@Column(updatable = false) // update 불가
 	private LocalDateTime createdDate;
-	@CreationTimestamp
+	
+	@UpdateTimestamp
 	@Column(insertable = false) // 자동생성 불가
 	private LocalDateTime updatedDate;
 

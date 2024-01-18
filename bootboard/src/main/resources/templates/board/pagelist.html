@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>BoardList</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<div class="container">  
+		<h2>BoardList</h2>
+		<table class="memberlist">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>글제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="board: ${boardList}">
+					<td th:text="${board.id}"></td>
+					<td><a th:href="@{|/board/${board.id}|}" th:text="${board.boardTitle}"></a></td>
+					<td th:text="${board.boardWriter}"></td>
+					<td th:text="${#temporals.format(board.createdDate,
+							'yyyy-MM-dd HH:mm')}"></td>
+					<td th:text="${board.boardHits}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- 페이지 영역 -->
+		<div class="pagination">
+		<!-- 이전 페이지 -->
+		<!-- 2페이지클릭 : db페이지는 1page -->
+		<a th:href="${boardList.first}?'#' :
+					 @{/board/pagelist(page=${boardList.number})}">Prev</a>
+		<!-- 페이지 번호 영역 -->
+			<span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+				<!-- <span th:text="${page}"></span> -->
+				<!-- 쿼리 스트링 방식 : /board/pagelist?page=1 -->
+				<a th:href="@{/board/pagelist(page=${page})}" th:text="${page}"></a>
+			</span>
+		<!-- 다음 페이지 -->
+		<!-- 현재 2페이지인데 3페이지로 가고싶다 : 실제 페이지는 1page -->
+		<a th:href="${boardList.last}? '#' : 
+					@{/board/pagelist(page=${boardList.number + 2})}">Next</a>
+		</div>
+		<!-- 글쓰기 버튼 -->
+		<div class="btn_write">
+			<a th:href="@{/board/write}"><button type="button">글쓰기</button></a>
+		</div>
+	</div>
+</body>
+</html>

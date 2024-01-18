@@ -36,8 +36,10 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="text" name="CreatedDate"
-							readonly th:value="${board.createdDate}">
+						<span th:if="${board.updatedDate != null}"
+						th:text="'수정일: ' + ${#temporals.format(board.updatedDate, 'yyyy-MM-dd HH:mm')}"></span>
+						<span th:unless="${board.updatedDate != null}"
+						th:text="'작성일: ' + ${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
 					</td>
 				</tr>
 				<tr>
