@@ -6,8 +6,19 @@
 <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-	<div class="container">  
-		<h2>BoardList</h2>
+	<div class="container">
+	<h2>BoardList</h2>
+	<!-- 검색 영역 -->
+	<form th:action="@{/board/pagelist}" method="get" class="searchform">
+	
+	<select name="type" class="sel_type">
+		<option th:value="title" th:text="제목" th:selected="${type == 'title'}"></option>
+		<option th:value="content" th:text="내용" th:selected="${type == 'content'}"></option>
+	</select>
+		<input type="text" name="keyword" th:value="${kw}">
+		<input type="submit" value="검색">
+	</form>
+	<!-- 글목록 -->
 		<table class="memberlist">
 			<thead>
 				<tr>
@@ -21,7 +32,8 @@
 			<tbody>
 				<tr th:each="board: ${boardList}">
 					<td th:text="${board.id}"></td>
-					<td><a th:href="@{|/board/${board.id}|}" th:text="${board.boardTitle}"></a></td>
+					<!-- page 클래스의 메서드인 number는 getNumber이다  -->
+					<td><a th:href="@{|/board/${board.id}|(page=${boardList.number + 1})}" th:text="${board.boardTitle}"></a></td>
 					<td th:text="${board.boardWriter}"></td>
 					<td th:text="${#temporals.format(board.createdDate,
 							'yyyy-MM-dd HH:mm')}"></td>
@@ -39,7 +51,11 @@
 			<span th:each="page: ${#numbers.sequence(startPage, endPage)}">
 				<!-- <span th:text="${page}"></span> -->
 				<!-- 쿼리 스트링 방식 : /board/pagelist?page=1 -->
-				<a th:href="@{/board/pagelist(page=${page})}" th:text="${page}"></a>
+				<!-- 현재 페이지는 링크없이 숫자만 표시 -->
+				<span class="current_page" th:if="${page == boardList.number + 1}" th:text="${page}"></span>
+				<span th:if="${page != boardList.number + 1}">
+					<a th:href="@{/board/pagelist(page=${page})}" th:text="${page}"></a>
+				</span>
 			</span>
 		<!-- 다음 페이지 -->
 		<!-- 현재 2페이지인데 3페이지로 가고싶다 : 실제 페이지는 1page -->

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.khit.board.dto.BoardDTO;
 import com.khit.board.service.BoardService;
@@ -37,15 +39,16 @@ public class BoardController {
 	//글쓰기 처리
 	@PostMapping("/write")
 	//@valid, bindingresult : 유효성 검사시 추가
-	public String write(@Valid BoardDTO boardDTO, 
-			BindingResult bindingResult) {
+	public String write(@Valid BoardDTO boardDTO,
+			BindingResult bindingResult,
+			MultipartFile boardFile) throws Exception {
 		if(bindingResult.hasErrors()) { //에러가 있으면 글쓰기폼으로 이동
 			log.info("has errors....");
 			return "/board/write";
 		}
 		//글쓰기 처리
-		boardService.save(boardDTO);
-		return "redirect:/";
+		boardService.save(boardDTO, boardFile);
+		return "redirect:/board/pagelist";
 	}
 	
 	
@@ -59,10 +62,20 @@ public class BoardController {
 	
 	//글목록 (페이지)
 	@GetMapping("/pagelist")
-	public String getPageList
-			(@PageableDefault(page = 1) Pageable pageable,
+	public String getPageList(
+			@RequestParam(value="type", required = false) String type,
+			@RequestParam(value="keyword", required = false) String keyword,//required = false : 키워드를 안넣어도 데이터가 나오게
+			@PageableDefault(page = 1) Pageable pageable,
 			Model model) {
-		Page<BoardDTO> boardDTOList = boardService.findListAll(pageable);
+		//검색어가 없으면 페이지 처리를 하고, 검색어가 있으면 검색어로 페이지 처리
+		Page<BoardDTO> boardDTOList = null;
+		if(keyword == null) {
+			boardDTOList = boardService.findListAll(pageable);
+		}else if(type != null && type.equals("title")) {
+			boardDTOList = boardService.findByBoardTitleContaining(keyword, pageable);
+		}else if(type != null && type.equals("content")) {
+			boardDTOList = boardService.findByBoardContentContaining(keyword, pageable);
+		}
 		//하단에 페이지 영역 만들기
 		int blockLimit = 10; //하단에 보여줄 페이지 개수
 		//시작 페이지 1, 11, 21 / ex)12를 10으로 나누면 1.2가 나오니 반올림후 실수로 변경하면 2
@@ -73,6 +86,8 @@ public class BoardController {
 				boardDTOList.getTotalPages() : startPage + blockLimit - 1;
 		
 		model.addAttribute("boardList", boardDTOList);
+		model.addAttribute("type", type); //검색 유형 보내기
+		model.addAttribute("kw", keyword);//검색어 보내기
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		return "/board/pagelist";
@@ -81,12 +96,15 @@ public class BoardController {
 	//글 상세보기
 	@GetMapping("/{id}")
 	public String getBoard(@PathVariable Long id,
+			//글 상세보기 후 기존 페이지 넘버로 가기
+			@PageableDefault(page = 1) Pageable pageable,
 			Model model) {
 		//조회수
 		boardService.updateHits(id);
 		//글 상세보기
 		BoardDTO boardDTO = boardService.findById(id);
 		model.addAttribute("board", boardDTO);
+		model.addAttribute("page", pageable.getPageNumber());
 		return "/board/detail";
 	}
 	//글 삭제

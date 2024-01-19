@@ -40,12 +40,20 @@ public class Board extends BaseEntity {
 	@Column
 	private Integer boardHits;
 	
+	@Column
+	private String filename;
+	
+	@Column
+	private String filepath;
+	
 	//dto를 entity로 변환하는 정적 메서드
 	public static Board toSaveEntity(BoardDTO boardDTO) {
 		Board board = Board.builder()
 				.boardTitle(boardDTO.getBoardTitle())
 				.boardWriter(boardDTO.getBoardWriter())
 				.boardContent(boardDTO.getBoardContent())
+				.filename(boardDTO.getFilename())
+				.filepath(boardDTO.getFilepath())
 				.boardHits(0)
 				.build();
 		
@@ -58,6 +66,8 @@ public class Board extends BaseEntity {
 				.boardTitle(boardDTO.getBoardTitle())
 				.boardWriter(boardDTO.getBoardWriter())
 				.boardContent(boardDTO.getBoardContent())
+				.filename(boardDTO.getFilename())
+				.filepath(boardDTO.getFilepath())
 				.boardHits(boardDTO.getBoardHits())
 				.build();
 				

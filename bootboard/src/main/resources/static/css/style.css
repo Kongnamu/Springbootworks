@@ -10,6 +10,14 @@ a{text-decoration: none;}
 h2 {
     color: #667788;
 }
+.searchform{
+	text-align: right;
+	padding-right: 603px;
+}
+
+.sel_type{
+	padding: 4px;
+}
 
 /* join 스타일 */
 ul li{
@@ -36,6 +44,7 @@ input {
     cursor: pointer;
     border-radius: 5px;
     border: none;
+    border : 1px solid #ccc;
 }
 
 /* list 스타일 */
@@ -61,6 +70,7 @@ input {
     cursor: pointer;
     border-radius: 5px;
     border: none;
+    
 }
 .detail label{
 	width: 150px;
@@ -107,7 +117,9 @@ textarea{
 	width:680px; height:300px;
 }
 .pagination{margin: 10px; text-align: center;}
-.pagination a{padding: 4px;}
+.pagination a{padding: 4px; text-decoration : underline;
+			color: #555;}
+.pagination .current_page{font-weight: bold;}
 .btn_write{
 	text-align: right; padding-right: 603px;
 }

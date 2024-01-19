@@ -26,6 +26,7 @@
 					<td>
 						<textarea rows="5" cols="50" name="boardContent"
 								 readonly th:text="${board.boardContent}" ></textarea>
+						<img th:src="@{${board.filepath}}" alt="배우">
 					</td>
 				</tr>
 				<tr>
@@ -54,7 +55,8 @@
 								<input type="button" value="삭제">
 							</a>
 						</th:block>
-							<a th:href="@{/board/list}">
+						<!-- Pageable 클래스의 page -> 컨트롤러에서 getPageNumber() 사용 -->
+							<a th:href="@{/board/pagelist(page=${page})}">
 								<input type="button" value="목록">
 							</a>
 					</td>
