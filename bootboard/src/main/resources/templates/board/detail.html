@@ -2,67 +2,73 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Detail</title>
+<title>Index...</title>
 <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-	<div class="container">
-		<h2>Detail Message</h2>
-		<table class="tbl_list">
-			<tbody>
-				<tr>
-					<td>
-						<input type="text" name="boardTitle"
-							placeholder="글 제목" readonly th:value="${board.boardTitle}">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" name="boardWriter"
-							readonly th:value="${board.boardWriter}">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<textarea rows="5" cols="50" name="boardContent"
-								 readonly th:text="${board.boardContent}" ></textarea>
-						<img th:src="@{${board.filepath}}" alt="배우">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" name="boardHits"
-							readonly th:value="'조회수: ' + ${board.boardHits}">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span th:if="${board.updatedDate != null}"
-						th:text="'수정일: ' + ${#temporals.format(board.updatedDate, 'yyyy-MM-dd HH:mm')}"></span>
-						<span th:unless="${board.updatedDate != null}"
-						th:text="'작성일: ' + ${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<th:block th:if="${session.sessionName == board.boardWriter}">
-							<a th:href="@{|/board/update/${board.id}|}">
-								<input type="button" value="수정">
-							</a>
-						
-							<a th:href="@{|/board/delete/${board.id}|}"
-								onclick="return confirm('정말로 삭제하시겠습니까?')">
-								<input type="button" value="삭제">
-							</a>
-						</th:block>
-						<!-- Pageable 클래스의 page -> 컨트롤러에서 getPageNumber() 사용 -->
-							<a th:href="@{/board/pagelist(page=${page})}">
-								<input type="button" value="목록">
-							</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+    <div id="container">
+         <h2>글 상세보기</h2>
+         <table class="tbl_list">
+             <tbody>
+               <tr>
+                  <td>
+                     <input type="text" name="boardTitle"
+                        th:value="${board.boardTitle}" readonly>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <input type="text" name="boardWriter"
+                        th:value="${board.boardWriter}" readonly>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <textarea rows="5" cols="50" name="boardContent"
+                         th:text="${board.boardContent}" readonly></textarea>
+                        <img th:src="@{${board.filepath}}">
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <span th:text="'조회수: ' + ${board.boardHits}"></span>
+                     
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                      <span th:if="${board.updatedDate} != null" 
+                            th:text="'수정일: ' + ${#temporals.format(board.updatedDate,
+                         'yyyy-MM-dd HH:mm')}"></span>
+                     <span th:unless="${board.updatedDate} != null"      
+                             th:text="'작성일: ' + ${#temporals.format(board.createdDate,
+                         'yyyy-MM-dd HH:mm')}"></span>
+                  
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <span th:if="${session.sessionName == board.boardWriter}">
+                        <a th:href="@{|/board/update/${board.id}|}">
+                           <input type="button" value="수정">
+                        </a>
+                        <a th:href="@{|/board/delete/${board.id}|}"
+                           onclick="return confirm('해당 게시글을 삭제하시겠습니까?')">
+                           <input type="button" value="삭제">
+                        </a>
+                      </span>
+                      <a th:href="@{/board/pagelist(page=${page})}">
+                        <input type="button" value="목록">
+                     </a>
+                  </td>
+               </tr>
+             </tbody>
+          </table>
+   </div>
 </body>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<head>
+<meta charset="UTF-8">
+<title>Index...</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{/layout/header::header-fragment}"></div>
+	<div class="container">  
+		<h2>My Hoooooooom!</h2>
+		<img th:src="@{/images/토이스토리.jpg}">
+	</div>
+	
+	<div class="weather">
+		<h2>오늘의 날씨</h2>
+  		<h3 class="result">
+      <!-- 20240125, 0600, -9 -->
+ 		</h3>
+	</div>
+	<!-- <div class="menu">
+		<a th:href="@{/main}">메인</a>&nbsp;&nbsp;&nbsp;
+		<a th:href="@{/member/join}">회원가입</a>&nbsp;&nbsp;&nbsp;
+		<a th:href="@{/member/list}">회원목록</a>&nbsp;&nbsp;&nbsp;
+		<a th:href="@{/board/list}">글목록</a>&nbsp;&nbsp;&nbsp;
+		<a th:href="@{/auth/main}">인증</a>&nbsp;&nbsp;&nbsp;
+	</div> -->
+	<!-- footer.html -->
+<div th:replace="~{/layout/footer::footer-fragment}"></div>
+<script src="/js/weather.js"></script>
+</body>
+</html>

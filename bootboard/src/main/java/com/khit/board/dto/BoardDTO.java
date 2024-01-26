@@ -34,6 +34,9 @@ public class BoardDTO {
 	private String boardContent;
 	
 	private Integer boardHits;
+	
+	//write.html에서 name 값과 다른 이름으로 만들어야 함
+	//MultipartFile과 String 타입이 서로 다르기 떄문
 	private String filename;
 	private String filepath;
 	

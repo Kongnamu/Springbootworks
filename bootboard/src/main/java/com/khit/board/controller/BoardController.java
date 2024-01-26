@@ -51,7 +51,6 @@ public class BoardController {
 		return "redirect:/board/pagelist";
 	}
 	
-	
 	//글 목록
 	@GetMapping("/list")
 	public String getList(Model model) {
@@ -123,8 +122,10 @@ public class BoardController {
 	}
 	//글 수정 처리
 	@PostMapping("/update")
-	public String update(@ModelAttribute BoardDTO boardDTO) {
-		boardService.update(boardDTO);
+	public String update(@ModelAttribute BoardDTO boardDTO,
+			MultipartFile boardFile) throws Exception {
+		//수정 후 글 상세보기로 이동
+		boardService.update(boardDTO, boardFile);
 		return "redirect:/board/" + boardDTO.getId();
 	}
 }

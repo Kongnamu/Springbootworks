@@ -17,6 +17,6 @@ public interface BoardRepository extends JpaRepository<Board, Long>{
 
 	//제목으로 검색하고 페이지 처리
 	public Page<Board> findByBoardTitleContaining(String keyword, Pageable pageable);
-	//
+	//글 내용으로 검색하고 페이지 처리
 	public Page<Board> findByBoardContentContaining(String keyword, Pageable pageable);
 }

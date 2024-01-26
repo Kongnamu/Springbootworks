@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>BoardList</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{/layout/header::header-fragment}"></div>
+	<div class="container">  
+		<h2>BoardList</h2>
+		<table class="memberlist">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>글제목</th>
+					<th>글내용</th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="board: ${board}">
+					<td th:text="${board.id}"></td>
+					<td>
+						<a th:href="@{|/board/${board.id}|}" th:text="${board.title}"></a>
+					</td>
+					<td th:text="${board.content}"></td>
+					<td th:text="${#dates.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="btn_write">
+			<a th:href="@{/board/write}"><button>글쓰기</button></a>
+		</div>
+	</div>
+<div th:replace="~{/layout/footer::footer-fragment}"></div>
+</body>
+</html>

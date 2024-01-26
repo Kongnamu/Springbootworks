@@ -1,0 +1,152 @@
+@charset "UTF-8";
+
+/* header스타일 */
+header{height: 80px; background: #667788;}
+header #logo{width: 160; float: left; line-height: 40px;}
+#logo h2 a{color: white; padding-left: 24px; font-style: italic;}
+#logo h2 a:hover{color: #eee;}
+#topMenu{margin-left: 450px;}
+#topMenu li{float: left; margin: 0 20px; line-height: 80px;}
+#topMenu li a{color: #eee; padding: 0 60px;}
+#topMenu li a:hover{color: #444;}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ddddcc;
+    text-align: center;
+}
+.weather{
+	margin: 16px;
+}
+a{text-decoration: none;}
+
+.searchform{
+	text-align: right;
+	padding-right: 603px;
+}
+
+.sel_type{
+	padding: 4px;
+}
+
+/* join 스타일 */
+ul li{
+	list-style: none;
+}
+
+.joinform{
+	width: 500px;
+	margin: 0 auto;
+}
+
+.joinform label{
+	width: 100px;
+	float: left;
+	margin: 5px;
+}
+
+input {
+    background-color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    border : 1px solid #ccc;
+}
+
+/* list 스타일 */
+.memberlist{width: 700px; margin: 0 auto;
+	border-collapse: collapse;}
+	
+.memberlist th{border-bottom: 2px solid black;
+    padding: 8px;}
+    
+.memberlist td{border-bottom: 1px dotted gray;
+    padding: 8px;}
+    
+/* detail 스타일 */
+.detail{width: 420px; margin: 0 auto;}
+.detail input {
+	background-color: gray;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+.detail label{
+	width: 150px;
+	margin: 5px;
+	}
+.detail up{padding: 0;}
+.reply-insert{
+	border: 1px solid #ccc;
+	width: 700px; margin: 0 auto;
+}
+.reply-insert p{
+	margin-top: 10px;
+	margin-bottom: 0
+}
+.reply-insert textarea{
+	width: 685px; margin: 0 auto;
+	text-align: center;
+}
+#btn-save-reply{
+	margin: 10px;
+}
+
+textarea{
+	background-color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+/* login 스타일 */
+.joinform input {
+	background-color: gray;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+.error {
+	color: red;
+}
+
+/* write 스타일 */
+.tbl_list {width: 700px; margin: 0 auto;
+	border-collapse: collapse;}
+.tbl_list tr, td{border: 1px solid #ccc;}
+.tbl_list input[type="text"]{
+	width:680px; height:30px;
+}
+.tbl_list textarea{
+	width:680px; height:300px;
+}
+.pagination{margin: 10px; text-align: center;}
+.pagination a{padding: 4px; text-decoration : underline;
+			color: #555;}
+.pagination .current_page{font-weight: bold;}
+.btn_write{
+	text-align: right; padding-right: 580px; margin-top: 20px;
+}
+
+
+

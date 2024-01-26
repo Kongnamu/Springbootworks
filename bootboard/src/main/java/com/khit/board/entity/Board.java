@@ -59,7 +59,7 @@ public class Board extends BaseEntity {
 		
 				return board;
 	}
-	//업데이트 : 수정을 위한 정적 메서드 (id를 포함함)
+	//업데이트 : 수정을 위한 정적 메서드 (id를 포함함) - 첨부파일 있는 경우
 	public static Board toUpdateEntity(BoardDTO boardDTO) {
 		Board board = Board.builder()
 				.id(boardDTO.getId())
@@ -73,4 +73,16 @@ public class Board extends BaseEntity {
 				
 				return board;
 			}
+	//첨부파일이 없는 경우
+	/* public static Board toUpdateNoFile(BoardDTO boardDTO) {
+		Board board = Board.builder()
+				.id(boardDTO.getId())
+				.boardTitle(boardDTO.getBoardTitle())
+				.boardWriter(boardDTO.getBoardWriter())
+				.boardContent(boardDTO.getBoardContent())
+				.boardHits(boardDTO.getBoardHits())
+				.build();
+		
+		return board;
+	} */
 }
