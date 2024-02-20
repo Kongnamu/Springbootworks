@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=jznvhncfl7"></script>
+<head>
+<meta charset="UTF-8">
+<title>Index...</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{header::header-fragment}"></div>
+	<div class="container"> 
+		<div id="map" style="width:100%;height:400px;">
+  			<!-- 지도 표시 영역 -->
+		</div>
+		<h2>지진해일대피소 정보</h2>
+		<input type="button" value="실행" id="btn">
+			<table id="result">
+			<thead>
+				<tr>
+					<th>일련번호</th>
+					<th>시도명</th>
+					<th>시군구명</th>
+					<th>대피장소명</th>
+					<th>주소</th>
+					<th>경도</th>
+					<th>위도</th>
+					<th>수용가능인원(명)</th>
+					<th>해변으로부터의거리</th>
+					<th>내진적용여부</th>
+				<tr>
+			</thead>
+			<tbody>
+			
+			</tbody>
+			</table>
+		</div>
+<script th:inline="javascript"> 
+$(function() {
+$("#btn").click(function() {
+$.ajax({
+	type : "GET",
+	url: "https://apis.data.go.kr/1741000/TsunamiShelter3/getTsunamiShelter1List?serviceKey=deCaE8r4Ikno%2BNlv8TDtckr4NvaJ2UwrtJKBTcSCWL84r9cR3uq03QTRI8QOO3MMblrCNvxB9LnlNxiP95Do9A%3D%3D&pageNo=1&numOfRows=20&type=json",
+	dataType: "json",
+	success : function(data) {
+		console.log(data);
+		var itemArr = data.TsunamiShelter[1].row;
+		var value = "";
+			for(var i = 0; i < itemArr.length; i++) {
+		var item = itemArr[i];
+			value += "<tr>"
+				+ "<td>" + item.id + "</td>"
+				+ "<td>" + item.sido_name + "</td>"
+				+ "<td>" + item.sigungu_name + "</td>"
+				+ "<td>" + item.shel_nm + "</td>"
+				+ "<td>" + item.address + "</td>"
+				+ "<td>" + item.lon + "</td>"
+				+ "<td>" + item.lat + "</td>"
+				+ "<td>" + item.shel_av + "</td>"
+				+ "<td>" + item.lenth + "</td>"
+				+ "<td>" + item.seismic + "</td>"
+				+ "</tr>"
+		}
+
+		$("#result tbody").html(value);
+
+		},
+		error : function(error) {
+			console.log("ajax 통신 실패!" + error);
+		}
+
+		});
+	});
+});
+</script>
+</body>
+</html>

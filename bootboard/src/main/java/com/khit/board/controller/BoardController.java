@@ -118,15 +118,17 @@ public class BoardController {
 		//수정할 해당 페이지 가져오기
 		BoardDTO boardDTO = boardService.findById(id);
 		model.addAttribute("board", boardDTO);
-		return "/board/update";
+		return "board/update";
 	}
 	//글 수정 처리
 	@PostMapping("/update")
 	public String update(@ModelAttribute BoardDTO boardDTO,
-			MultipartFile boardFile) throws Exception {
+			MultipartFile boardFile, Model model) throws Exception {
 		//수정 후 글 상세보기로 이동
-		boardService.update(boardDTO, boardFile);
-		return "redirect:/board/" + boardDTO.getId();
+		BoardDTO upboardDTO = boardService.update(boardDTO, boardFile);
+		model.addAttribute("board", upboardDTO);
+		return "board/detail";
+		//return "redirect:/board/" + boardDTO.getId(); //상세보기로 이동(새로고침)
 	}
 }
 

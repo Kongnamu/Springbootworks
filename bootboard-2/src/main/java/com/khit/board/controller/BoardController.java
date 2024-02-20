@@ -29,7 +29,7 @@ public class BoardController {
 	public String getList(Model model) {
 		List<Board> boardList = boardService.findAll();
 		model.addAttribute("board", boardList);
-		return "/board/list";
+		return "board/list";
 	}
 	//글 상세보기
 	@GetMapping("/{id}")
@@ -37,12 +37,12 @@ public class BoardController {
 			Model model) {
 		Board boarddetail = boardService.findById(id);
 		model.addAttribute("board", boarddetail);
-		return "/board/detail";
+		return "board/detail";
 	}
 	//글쓰기 페이지
 	@GetMapping("/write")
 	public String writeForm() {
-		return "/board/write";
+		return "board/write";
 	}
 	//글쓰기 처리
 	@PostMapping("/write")
@@ -65,7 +65,7 @@ public class BoardController {
 		//해당 아이디의 수정할 게시글 가져오기
 		Board board = boardService.findById(id);
 		model.addAttribute("board", board);
-		return "/board/update";
+		return "board/update";
 	}
 	//수정 처리
 	@PostMapping("/update")

@@ -7,7 +7,7 @@
 <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div th:replace="~{/layout/header::header-fragment}"></div>
+<div th:replace="~{header::header-fragment}"></div>
 	<div class="container">  
 		<h2>My Hoooooooom!</h2>
 		<img th:src="@{/images/토이스토리.jpg}">
@@ -27,7 +27,7 @@
 		<a th:href="@{/auth/main}">인증</a>&nbsp;&nbsp;&nbsp;
 	</div> -->
 	<!-- footer.html -->
-<div th:replace="~{/layout/footer::footer-fragment}"></div>
+<div th:replace="~{footer::footer-fragment}"></div>
 <script src="/js/weather.js"></script>
 </body>
 </html>

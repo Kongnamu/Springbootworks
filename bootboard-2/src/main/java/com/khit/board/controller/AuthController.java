@@ -8,6 +8,12 @@ public class AuthController {
 
 	@GetMapping("/auth/main")
 	public String authMain() {
-		return "/auth/main";
+		return "auth/main";
+	}
+	
+	//권한 에러페이지
+	@GetMapping("/auth/accessDenied")
+	public String access() {
+		return "auth/accessDenied";
 	}
 }

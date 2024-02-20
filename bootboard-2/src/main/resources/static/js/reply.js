@@ -12,7 +12,7 @@ let replyObject = {
 	},
 		
 	insertReply: function(){
-		alert("댓글 등록 요청됨");
+		alert("댓글 등록 요청");
 		
 		let boardId = $("#boardId").val();
 		//document.getElementById(replyContent).value와 같음
@@ -42,6 +42,26 @@ let replyObject = {
 		}).done(function(response){
 			console.log(response);
 			replyContent = "";
+			location.href = "/board/" + boardId;
+		}).fail(function(error){
+			alert("에러 발생: " + error);
+		});
+	}, //insertReply 닫기
+	
+	deleteReply: function(boardId, replyId){
+		alert("댓글 삭제 요청됨")
+		
+		let header = $("meta[name='_csrf_header']").attr('content');
+		let token = $("meta[name='_csrf']").attr('content');
+		
+		$.ajax({
+			type: "DELETE",
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    },
+			url: "/reply/" + replyId
+		}).done(function(response){
+			console.log(response);
 			location.href = "/board/" + boardId;
 		}).fail(function(error){
 			alert("에러 발생: " + error);

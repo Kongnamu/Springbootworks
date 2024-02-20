@@ -7,7 +7,7 @@
 <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div th:replace="~{/layout/header::header-fragment}"></div>
+<div th:replace="~{header::header-fragment}"></div>
 	<div class="container">  
 		<h2>Member Update</h2>
 		<form th:action="@{/board/update}" method="post">
@@ -44,6 +44,6 @@
           </table>
 		</form>
 		</div>
-<div th:replace="~{/layout/footer::footer-fragment}"></div>
+<div th:replace="~{footer::footer-fragment}"></div>
 </body>
 </html>

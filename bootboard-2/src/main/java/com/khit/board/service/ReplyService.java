@@ -24,4 +24,8 @@ public class ReplyService {
 		//댓글 저장
 		replyRepository.save(reply);
 	}
+
+	public void deleteById(Integer replyId) {
+		replyRepository.deleteById(replyId);
+	}
 }

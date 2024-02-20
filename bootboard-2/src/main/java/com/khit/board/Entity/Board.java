@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.khit.board.dto.BoardDTO;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,10 +19,16 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @ToString(exclude = "member")
 @Setter
 @Getter
@@ -52,4 +60,25 @@ public class Board extends BaseEntity{
 	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
 	@OrderBy("id desc")
 	private List<Reply> replyList;
+	
+	public static Board toSaveEntity(BoardDTO boardDTO) {
+		Board board = Board.builder()
+				.title(boardDTO.getTitle())
+				.content(boardDTO.getContent())
+				.createdDate(boardDTO.getCreatedDate())
+				.build();
+		
+				return board;
+	}
+	
+	public static Board toUpdateEntity(BoardDTO boardDTO) {
+		Board board = Board.builder()
+				.id(boardDTO.getId())
+				.title(boardDTO.getTitle())
+				.content(boardDTO.getContent())
+				.createdDate(boardDTO.getCreatedDate())
+				.build();
+		
+				return board;
+	}
 }

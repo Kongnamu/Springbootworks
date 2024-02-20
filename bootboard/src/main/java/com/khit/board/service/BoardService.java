@@ -35,18 +35,23 @@ public class BoardService {
 		//1. 파일을 서버에 저장하고 
 		if(!boardFile.isEmpty()) { //전달된 파일이 있으면
 			//저장 경로
-			String filePath = "C:\\Springbootworks\\bootboard\\src\\main\\resources\\static\\upload\\";
+			//String filePath = "C:\\Springbootworks\\bootboard\\src\\main\\resources\\static\\upload\\";
+			
 			//중복된 파일명 없도록 설정
 			UUID uuid = UUID.randomUUID(); //무작위 아이디 생성
 			String fileName = uuid + "_" +  boardFile.getOriginalFilename(); //원본 파일
+			String filePath = "C:/springfiles/" + fileName;
 			//File 클래스 객체 생성
-			File savedFile = new File(filePath, fileName); //upload 폴더에 저장될 파일
+			File savedFile = new File(filePath); //실제 저장되는 파일
 			boardFile.transferTo(savedFile);
 			
 			//2. 파일 이름은 db로 저장
 			boardDTO.setFilename(fileName);
-			boardDTO.setFilepath("/upload/" + fileName); //upload경로를 표기하기 위함
-		} 
+			boardDTO.setFilepath(filePath); //upload경로를 표기하기 위함
+		}else {
+			boardDTO.setFilename(findById(boardDTO.getId()).getFilename());
+			boardDTO.setFilepath(findById(boardDTO.getId()).getFilepath());
+		}
 	
 		//dto -> entity로 변환
 		Board board = Board.toSaveEntity(boardDTO);
@@ -89,21 +94,19 @@ public class BoardService {
 		boardRepository.deleteById(id);
 	}
 	//글 수정
-	public void update(BoardDTO boardDTO, MultipartFile boardFile) throws Exception {
+	public BoardDTO update(BoardDTO boardDTO, MultipartFile boardFile) throws Exception {
 		//1. 파일을 서버에 저장하고 
 		if(!boardFile.isEmpty()) { //전달된 파일이 있으면 
-			//저장 경로
-			String filePath = "C:\\Springbootworks\\bootboard\\src\\main\\resources\\static\\upload\\";
-			//중복된 파일명 없도록 설정
 			UUID uuid = UUID.randomUUID(); //무작위 아이디 생성
 			String fileName = uuid + "_" +  boardFile.getOriginalFilename(); //원본 파일
+			String filePath = "C:/springfiles/" + fileName;
 			//File 클래스 객체 생성
-			File savedFile = new File(filePath, fileName); //upload 폴더에 저장될 파일
+			File savedFile = new File(filePath); //실제 저장되는 파일
 			boardFile.transferTo(savedFile);
 			
-			//2. 파일 이름을 db로 저장
+			//2. 파일 이름은 db로 저장
 			boardDTO.setFilename(fileName);
-			boardDTO.setFilepath("/upload/" + fileName); //upload경로를 표기하기 위함
+			boardDTO.setFilepath(filePath); //upload경로를 표기하기 위함
 		}else {
 			//수정할 파일이 없으면 게시글 번호 경로만 보여준다.
 			boardDTO.setFilepath(findById(boardDTO.getId()).getFilepath());
@@ -112,6 +115,8 @@ public class BoardService {
 		//dto -> entity
 		Board board = Board.toUpdateEntity(boardDTO);
 		boardRepository.save(board);
+		//상세보기
+		return findById(boardDTO.getId());
 	}
 	
 	//글 목록 (페이지 포함)

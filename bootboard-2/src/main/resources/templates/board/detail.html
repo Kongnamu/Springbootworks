@@ -10,7 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 <body>
-<div th:replace="~{/layout/header::header-fragment}"></div>
+<div th:replace="~{header::header-fragment}"></div>
     <div id="container">
          <h2>글 상세보기</h2>
          <table class="tbl_list">
@@ -59,6 +59,18 @@
           		<p th:text="${reply.content}"></p>
           		<p th:text="'작성자: ' + ${reply.member.name} + 
           			'(작성일: ' + ${reply.createdDate} + ')'"></p>
+          		<p>
+          		
+          		<th:block sec:authorize="isAuthenticated()"
+                    th:if="${#authentication.getPrincipal.getUsername()} == 
+                    ${reply.member.memberId}">
+          		<!-- JS에서 자료형 값을 유지하기 위해 [[자료]]를 씀 -->
+          			<a th:href="'#'">수정</a> |
+          			
+          			<a th:href="'#'" 
+          			   th:onclick="replyObject.deleteReply([[${board.id}]], [[${reply.id}]])">삭제</a>
+          		</th:block>
+          		</p>
           	</div>
           </div>
           <!-- 댓글 등록 -->
@@ -72,7 +84,7 @@
           	<button id="btn-save-reply">댓글 등록</button>
           </div>
    </div>
-<div th:replace="~{/layout/footer::footer-fragment}"></div>
+<div th:replace="~{footer::footer-fragment}"></div>
 <script src="/js/reply.js"></script>
 </body>
 </html>
